@@ -5,6 +5,9 @@
 # @Site : 
 # @File : test-consumer.py
 # @Software: PyCharm
+import sys,os
+BASEDIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(BASEDIR)
 from kafka import *
 import time
 import protobuf_test.genericobj_pb2 as genericobj
@@ -20,7 +23,8 @@ def getObject(depdata_obj,object):
     object.ParseFromString(bindata)
     return object
 
-consumer=KafkaConsumer('index-vehicle',bootstrap_servers=['192.168.6.27:9092'])
+#consumer=KafkaConsumer('index-vehicle',bootstrap_servers=['192.168.6.27:9092'])
+consumer=KafkaConsumer('index-vehicle',bootstrap_servers=['39.106.146.155:9092'])
 
 depdata_obj=deepdata.GenericObj()
 genericobj=genericobj.NonMotorVehicleObj()
