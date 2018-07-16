@@ -24,7 +24,10 @@ class task_run():
 
 
     def arge_parse(self):
-
+        '''
+        从命令行获取参数
+        :return:
+        '''
         parser=argparse.ArgumentParser(description="this is a simple deepvideo api tool")
         parser.add_argument("-f","--file",help="file inside rtsp",default="uri.txt")
         parser.add_argument("-ip","--ip",help="kafka ip",default=self.ip)
@@ -34,10 +37,6 @@ class task_run():
 
         return parser.parse_args()
 
-    # ip=arge_parse.parse_args().ip
-    # file=parser.parse_args().file
-    # port=parser.parse_args().port
-    # command=parser.parse_args().command
 
     def importer(self,stream_file="uri.txt"):
         '''
@@ -137,6 +136,12 @@ class task_run():
 
 
     def list_task(self,ip,port):
+        '''
+        显示任务列表
+        :param ip: 服务器ip
+        :param port: 服务器端口
+        :return: 返回任务列表id
+        '''
         task_id = []
         url = "http://{}:{}/api/task".format(ip, port)
         try:
@@ -223,8 +228,14 @@ class task_run():
 
 
 
-    def usage(self,ip,port):
-
+    def usage(self):
+        '''
+        使用说明
+        :return:
+        '''
+        ip=self.arge_parse().ip
+        file=self.arge_parse().file
+        port=self.arge_parse().port
 
         if hasattr(self,self.arge_parse().command):
             func=getattr(self,self.arge_parse().command)
@@ -249,10 +260,6 @@ class task_run():
                   )
 
 
-
 if __name__ == '__main__':
-
     t=task_run()
-    ip="192.168.6.52"
-    port=19876
-    t.usage(ip,port)
+    t.usage()
