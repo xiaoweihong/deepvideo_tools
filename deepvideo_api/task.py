@@ -11,7 +11,6 @@ import random
 import json
 import socket
 import argparse
-import getopt
 import sys
 
 
@@ -189,6 +188,18 @@ def add_task():
         print(resp.status_code)
 
 
+def del_task_single():
+    '''
+    随机删除一个任务
+    :return:
+    '''
+    taskId=random.choice(list_task())
+    url = "http://%s:%s/api/task?id=%d" % (ip, port, taskId)
+    resp = requests.delete(url)
+    if resp.status_code == 200:
+       print("任务{}-->删除成功".format(taskId))
+
+
 def del_task():
     '''
     删除任务
@@ -234,14 +245,10 @@ elif command == "at":
     add_task()
 elif command == "dt":
     del_task()
+elif command == "dts":
+    del_task_single()
 else:
     print(">>>>>>>>>>>命令参数不正确<<<<<<<<<<<<<<")
-
-
-
-
-
-
 
 
 

@@ -8,7 +8,7 @@
 from kafka import KafkaConsumer
 from kafka.structs import TopicPartition
 
-consumer=KafkaConsumer('index-vehicle',bootstrap_servers=['192.168.2.137:9078'],auto_offset_reset='earliest')
+consumer=KafkaConsumer('index-vehicle',bootstrap_servers=[':9078'],auto_offset_reset='earliest')
 count=0
 for msg in consumer:
     count+=1
@@ -20,3 +20,5 @@ for msg in consumer:
 #    msg = consumer.poll(timeout_ms=5)   #从kafka获取消息
 #    print(msg)
 #    time.sleep(1)
+if __name__=="__main__":
+    pass
